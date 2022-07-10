@@ -31,7 +31,7 @@ class Engine:
         self.client = pymongo.MongoClient(uri)
         self.db = self.client['crawler-db']
         
-        with open("sources.json", "r") as f:
+        with open("/src/sources.json", "r") as f:
             self.source = json.load(f)
             
         print(time.ctime(),'. Scrapper Initialized') 
