@@ -1,0 +1,159 @@
+{
+    "akbank": {
+        "url_credit": "https://www.hangikredi.com/kredi/ihtiyac-kredisi/akbank/direkt-kredi?",
+        "amount_range_credit": [
+            1000,
+            15000,
+            25000,
+            50001,
+            75001
+        ]
+    },
+    "alternatifbank": {
+        "url_credit": "https://www.hangikredi.com/kredi/ihtiyac-kredisi/alternatifbank/dosya-masrafsiz-dijital-bayram-kredisi?",
+        "amount_range_credit": [
+            1000
+        ]
+    },
+    "anadolubank": {
+        "url_credit": "https://www.hangikredi.com/kredi/ihtiyac-kredisi/anadolubank/ihtiyac-kredisi?",
+        "amount_range_credit": [
+            1000
+        ]
+    },
+    "cepteteb": {
+        "url_credit": "https://www.hangikredi.com/kredi/ihtiyac-kredisi/teb/cepteteb-ihtiyac-kredisi?",
+        "amount_range_credit": [
+            1000
+        ]
+    },
+    "denizbank": {
+        "url_credit": "https://www.hangikredi.com/kredi/ihtiyac-kredisi/denizbank/ihtiyac-kredisi?",
+        "amount_range_credit": [
+            1000,
+            3000,
+            100000
+        ]
+    },
+    "enpara": {
+        "url_credit": "https://www.hangikredi.com/kredi/ihtiyac-kredisi/enpara/masrafsiz-kredi?",
+        "amount_range_credit": [
+            1000
+        ]
+    },
+    "fibabanka": {
+        "url_credit": "https://www.hangikredi.com/kredi/ihtiyac-kredisi/fibabanka/ihtiyac-kredisi?",
+        "amount_range_credit": [
+            2000,
+            5001,
+            10001,
+            20001,
+            30001
+        ]
+    },
+    "garanti-bankasi": {
+        "url_credit": "https://www.hangikredi.com/kredi/ihtiyac-kredisi/garanti-bankasi/bahar-kredisi?",
+        "amount_range_credit": [
+            1000,
+            15000,
+            25000,
+            50000,
+            50001,
+            75000
+        ]
+    },
+    "ing-bank": {
+        "url_credit": "https://www.hangikredi.com/kredi/ihtiyac-kredisi/ing-bank/3-ay-ertelemeli-kredi?",
+        "amount_range_credit": [
+            500,
+            20000,
+            50000,
+            50001
+        ]
+    },
+    "odeabank": {
+        "url_credit": "https://www.hangikredi.com/kredi/ihtiyac-kredisi/odeabank/ihtiyac-kredisi?",
+        "amount_range_credit": [
+            1000
+        ]
+    },
+    "burganbank": {
+        "url_credit": "",
+        "amount_range_credit": []
+    },
+    "teb": {
+        "url_credit": "https://www.hangikredi.com/kredi/ihtiyac-kredisi/teb/cepteteb-ihtiyac-kredisi?",
+        "amount_range_credit": [
+            1000
+        ]
+    },
+    "halkbank": {
+        "url_credit": "https://www.hangikredi.com/kredi/ihtiyac-kredisi/halkbank/hizli-kredi?",
+        "amount_range_credit": [
+            1000
+        ]
+    },
+    "hsbc-bank": {
+        "url_credit": "https://www.hangikredi.com/kredi/ihtiyac-kredisi/hsbc-bank/ihtiyac-kredisi?",
+        "amount_range_credit": [
+            1000
+        ]
+    },
+    "icbc-bank": {
+        "url_credit": "https://www.hangikredi.com/kredi/ihtiyac-kredisi/icbc-bank/hesapli-kredi?",
+        "amount_range_credit": [
+            1000
+        ]
+    },
+    "turkiye-is-bankasi": {
+        "url_credit": "https://www.hangikredi.com/kredi/ihtiyac-kredisi/turkiye-is-bankasi/ihtiyac-kredisi?",
+        "amount_range_credit": [
+            3000
+        ]
+    },
+    "finansbank": {
+        "url_credit": "https://www.hangikredi.com/kredi/ihtiyac-kredisi/finansbank/3-ay-ertelemeli-kredi?",
+        "amount_range_credit": [
+            1000
+        ]
+    },
+    "sekerbank": {
+        "url_credit": "https://www.hangikredi.com/kredi/ihtiyac-kredisi/sekerbank/ihtiyac-kredisi?",
+        "amount_range_credit": [
+            1000
+        ]
+    },
+    "vakifbank": {
+        "url_credit": "https://www.hangikredi.com/kredi/ihtiyac-kredisi/vakifbank/ihtiyac-kredisi?",
+        "amount_range_credit": [
+            3000
+        ]
+    },
+    "yapi-kredi-bankasi": {
+        "url_credit": "https://www.hangikredi.com/kredi/ihtiyac-kredisi/yapi-kredi-bankasi/3-ay-ertelemeli-kredi?",
+        "amount_range_credit": [
+            1000,
+            40000,
+            50001,
+            100000
+        ]
+    },
+    "albaraka-turk": {
+        "url_credit": "https://www.hangikredi.com/kredi/ihtiyac-kredisi/albaraka-turk/ihtiyac-finansmani?",
+        "amount_range_credit": [
+            500
+        ]
+    },
+    "fastpay": {
+        "url_credit": "https://www.hangikredi.com/kredi/ihtiyac-kredisi/fastpay/fastkredi?",
+        "amount_range_credit": [
+            1000
+        ]
+    },
+    "kuveyt-turk": {
+        "url_credit": "https://www.hangikredi.com/kredi/ihtiyac-kredisi/kuveyt-turk/ihtiyac-finansmani?",
+        "amount_range_credit": [
+            1000
+        ]
+    }
+}
