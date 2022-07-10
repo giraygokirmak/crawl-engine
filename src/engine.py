@@ -31,7 +31,7 @@ class Engine:
         self.client = pymongo.MongoClient(uri)
         self.db = self.client['crawler-db']
         
-        with open("/src/sources.json", "r") as f:
+        with open("./src/sources.json", "r") as f:
             self.source = json.load(f)
             
         print(time.ctime(),'. Scrapper Initialized') 
@@ -61,7 +61,7 @@ class Engine:
         result_data = list(self.db[collection].find())[0]['data']
         return result_data
         
-    #@retry(tries=3, delay=10)
+    @retry(tries=3, delay=10)
     def get_deposit_rates(self,short_name):
         def col_fixer(col,allcols):
             allcols = [col.replace(' ','').replace('Gün','') for col in allcols]
