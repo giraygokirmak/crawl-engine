@@ -42,7 +42,7 @@ class Engine:
         print('Started to scrape data...')
         for short_name in self.source.keys():
             deposit_values[short_name] = self.get_deposit_rates(short_name)
-            for maturity in [3,6,9,12,24,30,36]:
+            for maturity in [3,6,9,12,18,24,30,36]:
                 credit_values = self.get_interest_rates(short_name,maturity,self.source,credit_values)
                 
         self.db['loan-collection'].drop()
