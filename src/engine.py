@@ -20,7 +20,6 @@ from bs4 import BeautifulSoup
 class Engine:
 
     def __init__(self):
-        self.snpst_dt = datetime.strftime(datetime.now(),'%Y%m%d')
         self.options = Options()
         self.options.headless = True
         self.driver = webdriver.Firefox(options=self.options)
@@ -49,11 +48,13 @@ class Engine:
         
         self.db['loan-collection'].insert_one({
             "index":"loan-data",
-            f"{self.snpst_dt}":credit_values.to_dict("records")
+            "date" : datetime.today().replace(microsecond=0),
+            "data" : credit_values.to_dict("records")
         })
         self.db['deposit-collection'].insert_one({
             "index":"deposit-data",
-            f"{self.snpst_dt}":deposit_values
+            "date" : datetime.today().replace(microsecond=0),
+            "data" : deposit_values 
         })
         print(time.ctime(),'. Scrapped data and updated database!') 
         
