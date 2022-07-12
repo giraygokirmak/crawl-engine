@@ -3,6 +3,7 @@ import json
 import time
 from retry import retry
 from urllib.parse import quote_plus
+from datetime import datetime
 
 from selenium import webdriver
 from selenium.webdriver.common import keys
@@ -19,6 +20,7 @@ from bs4 import BeautifulSoup
 class Engine:
 
     def __init__(self):
+        self.snpst_dt = datetime.strftime(datetime.now(),'%Y%m%d')
         self.options = Options()
         self.options.headless = True
         self.driver = webdriver.Firefox(options=self.options)
@@ -44,16 +46,14 @@ class Engine:
             deposit_values[short_name] = self.get_deposit_rates(short_name)
             for maturity in [3,6,9,12,18,24,30,36]:
                 credit_values = self.get_interest_rates(short_name,maturity,self.source,credit_values)
-                
-        self.db['loan-collection'].drop()
-        self.db['deposit-collection'].drop()
+        
         self.db['loan-collection'].insert_one({
             "index":"loan-data",
-            "data":credit_values.to_dict("records")
+            f"{self.snpst_dt}":credit_values.to_dict("records")
         })
         self.db['deposit-collection'].insert_one({
             "index":"deposit-data",
-            "data":deposit_values
+            f"{self.snpst_dt}":deposit_values
         })
         print(time.ctime(),'. Scrapped data and updated database!') 
         
