@@ -98,7 +98,7 @@ class Engine:
             deposit_values_tmp = deposit_values_tmp.replace("%","", regex=True)
             deposit_values_tmp['bank'] = short_name
             print(time.ctime(),'. Scraped deposit rates from source',short_name)
-        return deposit_values_tmp
+            return deposit_values_tmp
         
     @retry(tries=3, delay=10)
     def get_interest_rates(self,short_name,maturity,credit_source):
