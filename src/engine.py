@@ -38,13 +38,19 @@ class Engine:
         print(time.ctime(),'. Scrapper Initialized') 
         
     def update_rates(self):
-        deposit_values = {}
-        credit_values = pd.DataFrame()
+        deposit_values = []
+        credit_values = []
         print('Started to scrape data...')
         for short_name in self.source.keys():
             deposit_values[short_name] = self.get_deposit_rates(short_name)
             for maturity in [3,6,9,12,18,24,30,36]:
-                credit_values = self.get_interest_rates(short_name,maturity,self.source,credit_values)
+                credit_values.append(self.get_interest_rates(short_name,maturity,self.source))
+        
+        deposit_values = pd.concat(deposit_values,ignore_index=True)
+        cols = deposit_values.columns.drop(['bank','AnaPara'])
+        deposit_values[cols] = deposit_values[cols].apply(lambda x: x.astype(float))
+        
+        credit_values = pd.concat(credit_values,ignore_index=True)
         
         self.db['loan-collection'].insert_one({
             "index":"loan-data",
@@ -54,7 +60,7 @@ class Engine:
         self.db['deposit-collection'].insert_one({
             "index":"deposit-data",
             "date" : datetime.today().replace(microsecond=0),
-            "data" : deposit_values 
+            "data" : deposit_values.to_dict("records")
         })
         print(time.ctime(),'. Scrapped data and updated database!') 
         
@@ -97,16 +103,15 @@ class Engine:
             deposit_values_tmp = deposit_values_tmp.replace("-",0, regex=True)
             deposit_values_tmp = deposit_values_tmp.replace(",",".", regex=True)
             deposit_values_tmp = deposit_values_tmp.replace("%","", regex=True)
-
-        print(time.ctime(),'. Scraped deposit rates from source',short_name)
-        return json.loads(deposit_values_tmp.to_json(orient='records'))
+            deposit_values_tmp['bank'] = short_name
+            print(time.ctime(),'. Scraped deposit rates from source',short_name)
+            return deposit_values_tmp
         
     @retry(tries=3, delay=10)
-    def get_interest_rates(self,short_name,maturity,credit_source,credit_values):
+    def get_interest_rates(self,short_name,maturity,credit_source):
         bot = self.bot
         wait = WebDriverWait(bot, 60)
         
-        credit_values_tmp = credit_values.copy()
         url_credit = credit_source[short_name]['url_credit']
         amount_range = credit_source[short_name]['amount_range_credit']
 
@@ -140,29 +145,16 @@ class Engine:
                     fee = wait.until(EC.visibility_of_element_located(locator))
                     fee = float(fee.text.replace(' ','').replace('.','').replace('TL','').replace(',','.'))
                     fee_pct = (fee/amount_max)*100
-
-                    if credit_values_tmp.shape[0]==0:
-                        credit_values_tmp = pd.DataFrame({'bank':short_name,
-                                                          'amount_range_limit': amount_max, 
-                                                          'maturity': maturity,
-                                                          'interest_rate':interest_rate,
-                                                          'min_amount':min_amount,
-                                                          'max_amount':max_amount,
-                                                          'min_maturity':min_maturity,
-                                                          'max_maturity':max_maturity,
-                                                          'fee_pct':fee_pct},index=[0])
-                    else:
-                        tmpDF = pd.DataFrame({'bank':short_name,
-                                              'amount_range_limit': amount_max, 
-                                              'maturity': maturity,
-                                              'interest_rate':interest_rate,
-                                              'min_amount':min_amount,
-                                              'max_amount':max_amount,
-                                              'min_maturity':min_maturity,
-                                              'max_maturity':max_maturity,
-                                              'fee_pct':fee_pct},index=[0])
-                        credit_values_tmp = pd.concat([credit_values_tmp,tmpDF],ignore_index=True)
+                    
+                    print(time.ctime(),'. Scraped loan rates from source', short_name, maturity)
+                    return pd.DataFrame({'bank':short_name,
+                                                      'amount_range_limit': amount_max, 
+                                                      'maturity': maturity,
+                                                      'interest_rate':interest_rate,
+                                                      'min_amount':min_amount,
+                                                      'max_amount':max_amount,
+                                                      'min_maturity':min_maturity,
+                                                      'max_maturity':max_maturity,
+                                                      'fee_pct':fee_pct},index=[0])
             except:
                 print("Error:",short_name,maturity,amount_max,"is not supported!")
-        print(time.ctime(),'. Scraped loan rates from source', short_name, maturity)
-        return credit_values_tmp
